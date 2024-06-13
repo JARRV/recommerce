@@ -9,6 +9,7 @@ class Item(models.Model):
     product_id = models.IntegerField(unique=True)
     store = models.CharField(max_length=200)
     item_name = models.CharField(max_length=200)
+    item_type = models.CharField(max_length=200)
     picture = models.ImageField(upload_to=get_upload_path)
     brand = models.CharField(max_length=100)
     size = models.CharField(max_length=10)
