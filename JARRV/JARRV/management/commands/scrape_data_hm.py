@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import selenium 
 from selenium import webdriver
 from django.core.management.base import BaseCommand
-from JARRV.models import Item
+from webapp.models import Item
 import subprocess
 import json
 
@@ -13,15 +13,12 @@ class Command(BaseCommand):
     help = "Scrape data from e-commerce and recommerce sites and save it to the database"
 
     def handle(self, *args, **options):
-        all_data = []
-        for page in range(1, 5):
+        # all_data = []
+        for page in range(1, 4):
             data = self.fetch_summer_dresses_hm(page)
-            all_data.append(data)
-            if data:
-                all_data.extend(data)
-        if all_data:
-            self.save_to_file(all_data)
-
+            # print(data["results"][0])
+            parsed_data = self.parse_items(data)
+            self.store_items(parsed_data)
             
     def fetch_summer_dresses_hm(self, page):
         url = "https://www2.hm.com/hmwebservices/service/products/search/hm-greatbritain/Online/en"
@@ -64,3 +61,38 @@ class Command(BaseCommand):
         with open('summer_dresses_hm.json', 'w', encoding='utf-8') as file:
             json.dump(data, file, ensure_ascii=False, indent=4)
         self.stdout.write(self.style.SUCCESS("Data saved to summer_dresses_hm.json"))
+
+    def parse_items(self, response):
+        items = []
+        data = response["results"]
+
+        for item in data:
+            code = item.get("code") #product code
+            product_code= code.replace("_group_", "")
+
+            item = {
+                "store" : item.get("brandName"),
+                "item_name" : item.get("name"),
+                "item_type" : item.get("name").split()[-1],
+                "category" : item.get("categoryName"),
+                "picture_link" : item.get("images")[0].get("baseUrl"),
+                "brand" : item.get("brandName"),
+                "price" : item.get("price").get("value"),
+                "link": f"https://www2.hm.com/en_gb/productpage.{product_code}.html",
+            }
+            items.append(item)
+        return items
+    
+    def store_items(self, items):
+        for item in items:
+            Item.objects.create(
+                store=item["store"],
+                item_name=item["item_name"],
+                item_type=item["item_type"],
+                category=item["category"],
+                picture_link=item["picture_link"],
+                brand=item["brand"],
+                price=item["price"],
+                link=item["link"],
+            )
+    

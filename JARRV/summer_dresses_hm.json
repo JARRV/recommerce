@@ -16,7 +16,7 @@
                 },
                 "images": [
                     {
-                        "url": "https://lp2.hm.com/hmgoepprod?set=source[/c0/50/c0500ed7dcd93bf97172f85376a441f4f3cdad02.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
+                        "url": "https://lp2.hm.com/hmgoepprod?xset=source[/c0/50/c0500ed7dcd93bf97172f85376a441f4f3cdad02.jpg],origin[dam],category[],type[DESCRIPTIVESTILLLIFE],res[m],hmver[2]&call=url[file:/product/style]",
                         "baseUrl": "https://image.hm.com/assets/hm/c0/50/c0500ed7dcd93bf97172f85376a441f4f3cdad02.jpg"
                     }
                 ],
