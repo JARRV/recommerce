@@ -9,13 +9,13 @@ with open('summer_dresses_hm.json', 'r', encoding='utf-8') as file:
 
 curr_product = 2
 
-print(data[0]["results"][curr_product].get("name")) #item name
-print(data[0]["results"][curr_product].get("name").split()[-1]) #item type
-print(data[0]["results"][curr_product].get("price").get("value")) #item price
-print(data[0]["results"][curr_product].get("brandName")) #brand
-image_url = (data[0]["results"][curr_product].get("defaultArticle").get("images")[0].get("baseUrl")) #product image url 
-print(data[0]["results"][curr_product].get("categoryName")) #Category (kids, women, men)
-code = data[0]["results"][curr_product].get("code") #product code
+print(data["results"][curr_product].get("name")) #item name
+print(data["results"][curr_product].get("name").split()[-1]) #item type
+print(data["results"][curr_product].get("price").get("value")) #item price
+print(data["results"][curr_product].get("brandName")) #brand
+image_url = (data["results"][curr_product].get("defaultArticle").get("images")[0].get("baseUrl")) #product image url 
+print(data["results"][curr_product].get("categoryName")) #Category (kids, women, men)
+code = data["results"][curr_product].get("code") #product code
 product_code= code.replace("_group_", "")
 product_link = f"https://www2.hm.com/en_us/productpage.{product_code}.html"
 print(product_link)
@@ -24,7 +24,7 @@ print(product_link)
 
 def parse_items(response):
     items = []
-    data = response[0]["results"]
+    data = response["results"]
 
     for item in data:
         code = item.get("code") #product code
