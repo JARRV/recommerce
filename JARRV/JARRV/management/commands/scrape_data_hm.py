@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup as bs
-import selenium 
-from selenium import webdriver
 from django.core.management.base import BaseCommand
 from webapp.models import Item
 import subprocess
@@ -68,9 +66,10 @@ class Command(BaseCommand):
 
         for item in data:
             code = item.get("code") #product code
-            product_code= code.replace("_group_", "")
+            product_code = code.replace("_group_", "")
 
             item = {
+                "item_id": f"{product_code}_{item.get("brandName")}",
                 "store" : item.get("brandName"),
                 "item_name" : item.get("name"),
                 "item_type" : item.get("name").split()[-1],
@@ -86,6 +85,7 @@ class Command(BaseCommand):
     def store_items(self, items):
         for item in items:
             Item.objects.create(
+                item_id=item["item_id"], 
                 store=item["store"],
                 item_name=item["item_name"],
                 item_type=item["item_type"],

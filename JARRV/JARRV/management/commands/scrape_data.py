@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import selenium 
 from selenium import webdriver
 from django.core.management.base import BaseCommand
-from JARRV.models import Item
+from webapp.models import Item
 
 class Command(BaseCommand):
     help = "Scrape data from e-commerce and recommerce sites and save it to the database"
