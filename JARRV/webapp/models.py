@@ -47,8 +47,8 @@ class Item(models.Model):
 class Similar_Item(models.Model):
     item_id = models.AutoField(primary_key=True)
     original_item_id = models.ForeignKey(Item, on_delete=models.CASCADE, default=get_default_item)  # This should be a callable returning a valid primary key
-    store = models.CharField(max_length=200)
-    item_name = models.CharField(max_length=200)
+    store = models.CharField(max_length=400)
+    item_name = models.CharField(max_length=400)
     picture_link = models.URLField(default="http://example.com/default.jpg")
     price = models.CharField(max_length=200)
     link = models.URLField(default="http://example.com/default")
@@ -57,6 +57,7 @@ class Similar_Item(models.Model):
         return f"{self.item_name} {self.store}"
 
     class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['original_item_id', 'store', 'item_name'], name='unique_similar_item'),
-        ]
+        ordering = ['store', 'item_name']
+        # constraints = [
+        #     models.UniqueConstraint(fields=['original_item_id', 'store', 'item_name'], name='unique_similar_item'),
+        # ]

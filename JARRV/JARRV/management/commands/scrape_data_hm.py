@@ -15,7 +15,7 @@ class Command(BaseCommand):
         # data = self.fetch_summer_dresses_hm(3)
         # parsed_data = self.parse_items(data)
         all_data = []
-        for page in range(1, 4):
+        for page in range(1, 2):
             data = self.fetch_summer_dresses_hm(page)
             parsed_data = self.parse_items(data)
             self.store_items(parsed_data)
