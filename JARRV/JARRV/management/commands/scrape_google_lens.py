@@ -21,7 +21,6 @@ class Command(BaseCommand):
     def handle(self,*args, **options):
         #get rows from ItemTable to retreive item_id and url
         #values returns dictionaries..
-    
         for original_item_id, url in Item.objects.values_list('item_id','picture_link'):
             results, original_item_id = self.fetch_similar_images(url, original_item_id)
             self.save_to_file(results)
@@ -73,9 +72,9 @@ class Command(BaseCommand):
         item = {
             "original_item_id" : original_item_id,
             "store" : item.get("source"),
-            "item_name" : item.get("title"), #not there
-            "picture_link" : item.get("thumbnail"), #not there
-            "price": price, #there but weird formatting
+            "item_name" : item.get("title"), 
+            "picture_link" : item.get("thumbnail"), 
+            "price": price, 
             "link": item.get("link")
         }
         return item
