@@ -32,6 +32,7 @@ class Item(models.Model):
     brand = models.CharField(max_length=100)
     price = models.FloatField(max_length=3)
     link = models.URLField(default="http://example.com/default")
+    # water_consumption = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.item_name} {self.store}"
@@ -52,6 +53,7 @@ class Similar_Item(models.Model):
     picture_link = models.URLField(default="http://example.com/default.jpg")
     price = models.CharField(max_length=200)
     link = models.URLField(default="http://example.com/default")
+    # sizing = models.CharField(max_length=3, default='S')
 
     def __str__(self):
         return f"{self.item_name} {self.store}"
