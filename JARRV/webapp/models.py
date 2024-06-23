@@ -32,6 +32,7 @@ class Item(models.Model):
     brand = models.CharField(max_length=100)
     price = models.FloatField(max_length=3)
     link = models.URLField(default="http://example.com/default")
+    # water_consumption = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.item_name} {self.store}"
