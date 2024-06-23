@@ -52,6 +52,7 @@ class Similar_Item(models.Model):
     picture_link = models.URLField(default="http://example.com/default.jpg")
     price = models.CharField(max_length=200)
     link = models.URLField(default="http://example.com/default")
+    size = models.CharField(max_length=400, default="XS")
 
     def __str__(self):
         return f"{self.item_name} {self.store}"
