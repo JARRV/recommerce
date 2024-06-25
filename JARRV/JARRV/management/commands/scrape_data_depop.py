@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> rida
 import requests
 from bs4 import BeautifulSoup as bs
 from django.core.management.base import BaseCommand
@@ -5,8 +9,11 @@ from webapp.models import Item
 import subprocess
 import json
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> rida
 class Command(BaseCommand):
     help = "Scrape data from depop product page"
 
@@ -57,7 +64,11 @@ class Command(BaseCommand):
         if response.status_code == 200:
             return response.json()
         else:
+<<<<<<< HEAD
             self.stdout.write(self.style.ERROR(f"Failed to retrieve data from page {page}: {response.status_code}"))
+=======
+            self.stdout.write(self.style.ERROR(f"Failed: {response.status_code}"))
+>>>>>>> rida
             return None
                 
     def save_to_file(self, data):
@@ -65,3 +76,34 @@ class Command(BaseCommand):
             json.dump(data, file, ensure_ascii=False, indent=4)
         self.stdout.write(self.style.SUCCESS("Data saved to depop_product.json"))
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+'''
+       # price = soup.find('div', {"class": "ProductDetailsSticky-styles__StyledProductPrice-sc-17bd7b59-4 qJnzl"}).find('div')
+       # print(price)
+
+       # size = soup.find('button', {"class": "size-selector__size-option btn btn--tertiary tc--m fw--bold br--magenta"}).text.strip()
+       # print(size)
+        #if we really want to use sizes we are going to have to make sizes generic to our website, prob use a dictionary for each website
+        #matching sizing to ours.
+
+   
+
+    def item_in_stock(self, soup):
+
+        #if it is sold out then we dont store it at all
+        if soup.find('div', {"class" : "listing__inventory-status d--b col-x24 col-m16 bg--light-gray tc--dr"}):
+            sold_out_div = soup.find('div', {"class" : "listing__inventory-status d--b col-x24 col-m16 bg--light-gray tc--dr"})
+            text = sold_out_div.find('h2').text.strip()
+            if text == "This item is sold":
+                return False
+        else:
+            return True
+'''  
+
+>>>>>>> rida
