@@ -1,0 +1,1 @@
+npm install styled-components @mui/material @mui/icons-material @emotion/styled @emotion/react axios react-router-dom react-redux react-persist @reduxjs/toolkit
