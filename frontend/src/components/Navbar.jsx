@@ -63,7 +63,7 @@ const ButtonContainer = styled.div`
  display:flex;
  justify-content: flex-end;
  gap:28px;
- align-items:center;
+ align-items: center;
  padding:0 6px;
  color: color: ${({ theme }) => theme.primary};
 @media screen and (max-width:768px){
@@ -71,7 +71,7 @@ const ButtonContainer = styled.div`
  }
 `;
 const Navlink = styled(NavLink)`
- display: flex;
+  display: flex;
   align-items: center;
   color: ${({ theme }) => theme.text_primary};
   font-weight: 500;
@@ -138,11 +138,11 @@ const TextButton = styled.div`
 `;
 
 const Navbar = () => {
-  const [isOpen,setIsOpen] = useState(false);
+  const [isOpened,setIsOpen] = useState(false);
   return (
     <Nav>
       <NavbarContainer> 
-        <MobileIcon onClick={()=> setIsOpen(!isOpen)}>
+        <MobileIcon onClick={()=> setIsOpen(!isOpened)}>
           <MenuRounded style={{color:"inherit"}}/>
         </MobileIcon>
 
@@ -157,24 +157,29 @@ const Navbar = () => {
           <Navlink to="/Orders">Orders</Navlink>
           <Navlink to="/Contact">Contact</Navlink>
         </NavItems>
-        {isOpen &&( 
-          <MobileMenu isOpen={isOpen}>
+        { isOpened &&( 
+          <MobileMenu isOpen={isOpened}>
             
-            <Navlink to="/" onClick={() => setIsOpen(!isOpen)}>
-                Home
+              <Navlink to="/" onClick={() => setIsOpen(!isOpened)}>
+                Hsdgdgfgfgome
               </Navlink>
-              <Navlink to="/Shop" onClick={() => setIsOpen(!isOpen)} >
+
+              <Navlink to="/Shop" onClick={() => setIsOpen(!isOpened)} >
                 Shop
               </Navlink>
-              <Navlink onClick={() => setIsOpen(!isOpen)} to="/New_Arrivals">
+
+              <Navlink onClick={() => setIsOpen(!isOpened)} to="/New_Arrivals">
                 New Arrivals
               </Navlink>
-              <Navlink onClick={() => setIsOpen(!isOpen)} to="/Orders">
+
+              <Navlink onClick={() => setIsOpen(!isOpened)} to="/Orders">
                 Orders
               </Navlink>
-              <Navlink onClick={() => setIsOpen(!isOpen)} to="/Contact">
+
+              <Navlink onClick={() => setIsOpen(!isOpened)} to="/Contact">
                 Contact
               </Navlink>
+              
               <div
                 style={{
                   flex:"1",
@@ -192,8 +197,8 @@ const Navbar = () => {
                   
               </div>
 
-          </MobileMenu>
-        )}
+          </MobileMenu>)}
+
         <Mobileicons>
           <Navlink to="/search">
               <SearchRounded sx={{ color: "inherit", fontSize: "30px" }} />
@@ -206,6 +211,9 @@ const Navbar = () => {
                 sx={{ color: "inherit", fontSize: "28px" }}
               />
             </Navlink>
+            <Button
+              text="SignIn"
+              small/>
         </Mobileicons>
         <ButtonContainer>
           <Navlink to="/search">
