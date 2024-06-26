@@ -2,7 +2,7 @@ import React, { useEffect, useState,useDispatch } from "react";
  import styled from 'styled-components';
  import HeaderImage from "../utils/Images/Header.png"
  import LogoImg from "../utils/Images/Header.png"
- import ProductCard from "../components/ProductCard";
+ import ProductCard from "../components/cards/ProductCard";
  import { dummyProducts } from "../mockdata"; // Adjust the path as needed
  import { getOriginalItemDetail, getAllOriginalItems, getSimilarItems } from "../api";
  const Container = styled.div`
@@ -54,6 +54,7 @@ const CardWrapper = styled.div`
 
    const [loading, setLoading] = useState(false);
    const [products, setProducts] = useState([]);
+   
 
    const getAllItems = async () => {
      setLoading(true);
@@ -61,11 +62,12 @@ const CardWrapper = styled.div`
       const res = await getAllOriginalItems();
       const items = res.data;
       const allItems = await fetchSimilarItems(items);
+      
       console.log("HERE")
       console.log(allItems)
       const filteredItems = allItems.filter(item => item.similar_items.length > 0);
-      setProducts(filteredItems);
-      
+      const detailedFilteredItems = await calculatePercentage(filteredItems);
+      setProducts(detailedFilteredItems);
     }
     catch(error){
       console.log("Failed to fetch original items:", error);
@@ -99,6 +101,32 @@ const CardWrapper = styled.div`
       console.log("Failed to fetch similar items:", error);
     }
   };
+
+  const calculatePercentage = async (filteredItems) => {
+    try{
+      const allItems = await Promise.all(
+        filteredItems.map(async (item) =>{
+
+          let newPrice = item.similar_items[0].price;
+          let origPrice = item.price;
+          
+          let percentageOff = ((origPrice - newPrice)/origPrice)* 100;
+          let roundedPercentageOff = Math.round((percentageOff) / 5) * 5;
+          console.log("POP")
+          console.log(roundedPercentageOff)
+          return{
+            ...item, //takes all properties of item and spread them into a new object
+            percent_off: roundedPercentageOff
+          };
+        })
+      );
+      return allItems;
+    }
+    catch(error){
+      console.log("Failed to get percentage:", error);
+    }
+  };
+
    useEffect(() => {
      getAllItems();
    }, []);
@@ -131,7 +159,7 @@ const CardWrapper = styled.div`
         <Title center>JARRV</Title>
         <CardWrapper>
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product}/>
           ))}
         </CardWrapper>
       </Section>
