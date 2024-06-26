@@ -61,8 +61,6 @@ const CardWrapper = styled.div`
       const res = await getAllOriginalItems();
       const items = res.data;
       const allItems = await fetchSimilarItems(items);
-      console.log("HERE")
-      console.log(allItems)
       const filteredItems = allItems.filter(item => item.similar_items.length > 0);
       setProducts(filteredItems);
       

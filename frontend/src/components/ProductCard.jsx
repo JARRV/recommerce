@@ -208,6 +208,11 @@ const ProductCard = ({ product }) => {
       });
   };
 
+  const getPercentage = (original, recommerce) =>{
+    return Math.round(((original - recommerce) / original) * 100);
+
+  }
+
 
   useEffect(() => {
     checkFavourite();
@@ -232,7 +237,7 @@ const ProductCard = ({ product }) => {
               </>
             )}
           </MenuItem>{" "}
-          <MenuItem onClick={() => addCart(product?.id)}>
+          <MenuItem onClick={() => addCart(product?.item_id)}>
             <AddShoppingCartOutlined
               sx={{ color: "inherit", fontSize: "20px" }}
             />
@@ -242,13 +247,13 @@ const ProductCard = ({ product }) => {
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
         </Rate>
       </Top>
-      <Details onClick={() => navigate(`/shop/${product._id}`)}>
+      <Details onClick={() => navigate(`/shop/${product?.item_id}`)}>
         <Title>{product?.item_name}</Title>
         <Desc>{product?.brand}</Desc>
         <Price>
           
           ${product?.similar_items?.[0]?.price} <Span>${product?.price}</Span>
-          <Percent>${product?.price?.off}% Off</Percent>
+          <Percent>${getPercentage(product?.price, product?.similar_items?.[0]?.price)}% Off</Percent>
         </Price>
       </Details>
     </Card>
