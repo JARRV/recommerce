@@ -208,13 +208,14 @@ const ProductCard = ({ product }) => {
       });
   };
 
+
   useEffect(() => {
     checkFavourite();
   }, []);
   return (
     <Card>
       <Top>
-        <Image src={product?.img} />
+        <Image src={product?.picture_link} />
         <Menu>
           <MenuItem
             onClick={() => (favorite ? removeFavorite() : addFavorite())}
@@ -242,10 +243,11 @@ const ProductCard = ({ product }) => {
         </Rate>
       </Top>
       <Details onClick={() => navigate(`/shop/${product._id}`)}>
-        <Title>{product?.title}</Title>
-        <Desc>{product?.name}</Desc>
+        <Title>{product?.item_name}</Title>
+        <Desc>{product?.brand}</Desc>
         <Price>
-          ${product?.price?.org} <Span>${product?.price?.mrp}</Span>
+          
+          ${product?.similar_items?.[0]?.price} <Span>${product?.price}</Span>
           <Percent>${product?.price?.off}% Off</Percent>
         </Price>
       </Details>
