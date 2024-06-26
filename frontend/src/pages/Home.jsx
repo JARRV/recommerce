@@ -1,10 +1,10 @@
 import React, { useEffect, useState,useDispatch } from "react"; 
  import styled from 'styled-components';
- import HeaderImage from "/Users/roberttoribio/visa_hackathon/webscraping/frontend/src/utils/Images/Header.png";
+ import HeaderImage from "../utils/Images/Header.png"
  import LogoImg from "../utils/Images/Header.png"
  import ProductCard from "../components/ProductCard";
  import { dummyProducts } from "../mockdata"; // Adjust the path as needed
-
+ import { getOriginalItemDetail, getAllOriginalItems, getSimilarItems } from "../api";
  const Container = styled.div`
     padding: 20px 30px;
     padding-bottom: 200px;
@@ -51,7 +51,65 @@ const CardWrapper = styled.div`
 `;
 
  const Home = () => {
+
+   const [loading, setLoading] = useState(false);
    const [products, setProducts] = useState([]);
+
+   const getAllItems = async () => {
+     setLoading(true);
+    try{
+      const res = await getAllOriginalItems();
+      const items = res.data;
+      const allItems = await fetchSimilarItems(items);
+      console.log("HERE")
+      console.log(allItems)
+      const filteredItems = allItems.filter(item => item.similar_items.length > 0);
+      setProducts(filteredItems);
+      
+    }
+    catch(error){
+      console.log("Failed to fetch original items:", error);
+    }
+    finally{
+      setLoading(false);
+      
+    }
+   };
+   const fetchSimilarItems = async (items) => {
+    try{
+      const allItems = await Promise.all(
+        items.map(async (item) =>{
+          const similarRes = await getSimilarItems(item.item_id)
+          // console.log(similarRes.data)
+
+          const pricedSimilarItems = similarRes.data.filter(similarItem =>{
+            return similarItem.price !== "Unknown" && item.price > similarItem.price;
+          });
+
+          const sortedSimilarItems = pricedSimilarItems.sort((a,b) => a.price - b.price);
+          return{
+            ...item, //takes all properties of item and spread them into a new object
+            similar_items: sortedSimilarItems
+          };
+        })
+      );
+      return allItems;
+    }
+    catch(error){
+      console.log("Failed to fetch similar items:", error);
+    }
+  };
+   useEffect(() => {
+     getAllItems();
+   }, []);
+   console.log(products[0])
+  //  for (var i = 0; i < itemids.length; i++) {
+  //   console.log(itemids[i]);
+  //  }
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
    return (
      <Container>
       <Section
@@ -72,8 +130,8 @@ const CardWrapper = styled.div`
       <Section>
         <Title center>JARRV</Title>
         <CardWrapper>
-          {dummyProducts.map((product) => (
-            <ProductCard product={product} />
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </CardWrapper>
       </Section>
