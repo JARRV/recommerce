@@ -218,7 +218,7 @@ const ProductCard = ({ product }) => {
     checkFavourite();
   }, []);
   return (
-    <Card>
+    <Card onClick={() => navigate(`/shop/${product?.item_id}`)}>
       <Top>
         <Image src={product?.picture_link} />
         <Menu>

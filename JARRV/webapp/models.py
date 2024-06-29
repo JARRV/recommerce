@@ -66,17 +66,15 @@ class Similar_Item(models.Model):
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=200)
+    username = models.CharField(max_length=200, unique=True)
     full_name = models.CharField(max_length=200)
     account_creation = models.DateField()
     password = models.CharField(max_length=200)
     gender = models.CharField(max_length=15, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], blank=True, null=True)
-    email = models.EmailField(max_length=200)
+    email = models.EmailField(max_length=200, unique=True)
     total_water_saved = models.IntegerField(default=0)
     total_amount_saved = models.FloatField(max_length=3)
     loyalty_points = models.IntegerField(default=0)
-
-
     def __str__(self):
         return self.username
     
@@ -88,7 +86,7 @@ class PurchaseHistory(models.Model): #only when the purchase made is validated
     purchase_id = models.AutoField(primary_key=True)
     purchase_date = models.DateField()
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item_id = models.ForeignKey(Similar_Item, on_delete=models.CASCADE)
     size = models.CharField(max_length=200)
     item_price = models.FloatField(max_length=3)
     amount_saved = models.FloatField(max_length=3)
