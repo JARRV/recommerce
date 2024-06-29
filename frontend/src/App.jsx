@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import ShopListing from "./pages/ShoppingList"
 import Favorite from "./pages/Favorite";
 import Cart from "./pages/Cart"
+import ProductDetails from "./pages/ProductDetails"
 
 const Container = styled.div`
   width:100%;
@@ -24,11 +25,10 @@ function App(){
         <Navbar/>
         <Routes>
           <Route path='/' exact element ={<Home/>}/> 
-          <Route path="/shop" exact element={<ShopListing />} />
+          <Route path="/shop/:item_id" exact element={<ProductDetails/>} />
           <Route path="/favorite" exact element={<Favorite />} />
           <Route path="/cart" exact element={<Cart />} />
         </Routes>
-        Hi GFG   
       </Container>
     </BrowserRouter>
   </ThemeProvider>

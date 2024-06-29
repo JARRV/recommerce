@@ -55,7 +55,7 @@ const Span = styled.div`
     text-decoration-color: ${({ theme }) => theme.text_secondary + 50};
     `;
 
-const Brand = styled.div`
+const Store = styled.div`
     font-size: 18px;
     font-weight: 400;
     color: ${({ theme }) => theme.text_primary};
@@ -67,16 +67,20 @@ const Percent = styled.div`
     color: green;
     `;
 
-const RecommerceCard = () => {
+const RecommerceCard = ({recommerceProduct}) => {
+
+    //useEffect(() => {}, []);
     return <Card>
-        
         <Details>
-            <Brand>Poshmark</Brand>
-            <Price>$20.99 
+            <Store>{recommerceProduct?.store}</Store>
+            <Price>{recommerceProduct?.price} 
                 <Percent>20% off</Percent> 
             </Price>
-            <Button>Buy Now</Button> 
+            <Button onClick={() => {
+                window.open(recommerceProduct?.link)
+            }}>Buy Now</Button> 
         </Details>
+
     </Card>
 };
 
