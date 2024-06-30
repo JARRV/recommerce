@@ -17,7 +17,7 @@ const Details = styled.div`
     display: flex;
     gap: 18px;
     flex-direction: column;
-    padding: 4px 10px;
+    padding: 4px 2px;
     flex: 1;
 `;
 
@@ -42,7 +42,7 @@ const Price = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 500;
     color: ${({ theme }) => theme.text_primary};
     `;
@@ -80,7 +80,6 @@ const RecommerceCard = ({recommerceProduct}) => {
                 window.open(recommerceProduct?.link)
             }}>Buy Now</Button> 
         </Details>
-
     </Card>
 };
 

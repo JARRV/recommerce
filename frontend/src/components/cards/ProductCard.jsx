@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Rating } from "@mui/material";
+import { styled as muiStyled} from '@mui/material/styles';
+import WaterDropIcon from '../WaterDropIcon.jsx';
+//import { ReactComponent as CustomIcon } from '../../icons/water_drop.svg';
+import { ReactSVG } from 'react-svg';
 import styled from "styled-components";
 import {
   AddShoppingCartOutlined,
@@ -87,6 +91,16 @@ const Rate = styled.div`
   opacity: 0.9;
 `;
 
+const StyledRating = muiStyled(Rating)({
+  '& .MuiRating-iconFilled': {
+    color: '#ff6d75',
+  },
+  '& .MuiRating-iconHover': {
+    color: '#ff3d47',
+  },
+});
+
+
 const Details = styled.div`
 import { useDispatch } from "react-redux";
 import { openSnackbar } from "../../redux/reducers/snackbarSlice";
@@ -129,10 +143,31 @@ const Percent = styled.div`
   color: green;
 `;
 
+
+
+
+const EmptyWaterDropIcon = (props) => (
+  <svg fill="None" stroke="grey" strokeWidth="10" opacity="1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+     width="15px" height="15px" viewBox="0 0 264.564 264.564"
+     xml:space="preserve">
+  <g>
+    <g>
+      <path d="M132.281,264.564c51.24,0,92.931-41.681,92.931-92.918c0-50.18-87.094-164.069-90.803-168.891L132.281,0l-2.128,2.773
+        c-3.704,4.813-90.802,118.71-90.802,168.882C39.352,222.883,81.042,264.564,132.281,264.564z"/>
+    </g>
+  </g>
+  </svg>
+  
+);
+
+
 const ProductCard = ({ product }) => {
+
+
   //const dispatch = useDispatch();
   const navigate = useNavigate();
   const storeCount = product?.similar_items.length;
+  const gallons_saved = {"dress": 1550, "jeans": 1800, "t-shirt": 850, "hoodie": 1720, "sweatshirt": 1720}
   const [favorite, setFavorite] = useState(false);
   const [favoriteLoading, setFavoriteLoading] = useState(false);
 
@@ -154,6 +189,8 @@ const ProductCard = ({ product }) => {
         );
       });
   };
+
+  
   const removeFavorite = async () => {
     setFavoriteLoading(true);
     const token = localStorage.getItem("krist-app-token");
@@ -214,7 +251,11 @@ const ProductCard = ({ product }) => {
 
   }, []);
   return (
-    <Card>
+    <Card onClick={() => {
+      localStorage.setItem('product', JSON.stringify(product));
+      navigate(`/shop/${product?.item_id}`);
+        }
+      }>
       <Top>
         <Image src={product?.picture_link} />
         <Menu>
@@ -240,14 +281,16 @@ const ProductCard = ({ product }) => {
           </MenuItem>
         </Menu>
         <Rate>
-          <Rating value={3.5} sx={{ fontSize: "14px" }} />
+          <StyledRating 
+            name="read-only"
+            max = {Math.round(gallons_saved[product?.item_type]/500)} 
+            value={Math.round(gallons_saved[product?.item_type]/500)}
+            icon = {<WaterDropIcon/>}
+            emptyIcon = {<WaterDropIcon/>}
+            readOnly/>
         </Rate>
       </Top>
-      <Details onClick={() => {
-          localStorage.setItem('product', JSON.stringify(product));
-          navigate(`/shop/${product?.item_id}`);
-            }
-          }> 
+      <Details> 
         <Title>{product?.item_name}</Title>
         <Desc>{product?.brand}</Desc>
         <Price>
@@ -264,3 +307,7 @@ export default ProductCard;
 
 //`/shop/${product._id}`
 //product?.price?.off  
+
+/*<Rating value={3.5} sx={{ fontSize: "14px" }} />*/
+
+/*icon={<WaterDropIcon style={{fontSize: 'inherit'}}  />}*/

@@ -8,6 +8,8 @@ import React, { useEffect, useState,useDispatch } from "react";
  const Container = styled.div`
     padding: 20px 30px;
     padding-bottom: 200px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-color: black;
     height:100%;
     overflow-y:scroll;
     display:flex;
@@ -36,6 +38,7 @@ import React, { useEffect, useState,useDispatch } from "react";
   font-size: 28px;
   font-weight: 500;
   display: flex;
+  
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   align-items: center;
 `;
@@ -112,8 +115,6 @@ const CardWrapper = styled.div`
           
           let percentageOff = ((origPrice - newPrice)/origPrice)* 100;
           let roundedPercentageOff = Math.round((percentageOff) / 5) * 5;
-          console.log("POP")
-          console.log(roundedPercentageOff)
           return{
             ...item, //takes all properties of item and spread them into a new object
             percent_off: roundedPercentageOff
@@ -156,7 +157,9 @@ const CardWrapper = styled.div`
       </Section>
 
       <Section>
-        <Title center>JARRV</Title>
+        <Title>JARRV</Title>
+        <p><hr/></p>
+        
         <CardWrapper>
           {products.map((product) => (
             <ProductCard key={product.id} product={product}/>
