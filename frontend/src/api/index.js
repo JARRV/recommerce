@@ -28,6 +28,12 @@ export const getUserList = async () =>
 
 export const getUserInfo = async(user_id) =>
     await API.get(`/users/${user_id}`);
+// User Login and Registration
+
+export const UserSignUp = async (data) => await API.post("/signup/", data);
+
+export const UserSignIn = async (data) => await API.post("/signin/", data);
+
 
 
 //Purchase History

@@ -217,8 +217,8 @@ const ProductCard = ({ product }) => {
     checkFavourite();
   }, []);
   return (
-    <Card>
-      <Top>
+    <Card >
+      <Top >
         <Image src={product?.img} />
         <Menu>
           <MenuItem

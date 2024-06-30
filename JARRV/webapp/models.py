@@ -65,18 +65,22 @@ class Similar_Item(models.Model):
         # ]
 
 class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
+    user_id = models.AutoField(primary_key=True) #how to populate
     username = models.CharField(max_length=200, unique=True)
     full_name = models.CharField(max_length=200)
-    account_creation = models.DateField()
+    account_creation = models.DateField(auto_now_add=True) #how to populate
     password = models.CharField(max_length=200)
     gender = models.CharField(max_length=15, choices=[('M', 'Male'), ('F', 'Female'), ('O', 'Other')], blank=True, null=True)
     email = models.EmailField(max_length=200, unique=True)
     total_water_saved = models.IntegerField(default=0)
-    total_amount_saved = models.FloatField(max_length=3)
+    total_amount_saved = models.FloatField(max_length=3, default=0)
     loyalty_points = models.IntegerField(default=0)
     def __str__(self):
         return self.username
+    
+    @property
+    def id(self):
+        return self.user_id
     
     class Meta:
         ordering = ['username']
