@@ -235,7 +235,7 @@ const CardWrapper = styled.div`
        
           <TextWrapper>
             <Quote>
-              "The fashion industry is the second largest consumer of water. Water is used for bleaching, dyeing, and growing cotton. 
+              "CHANGE THIS The fashion industry is the second largest consumer of water. Water is used for bleaching, dyeing, and growing cotton. 
               While water may have been considered en endless resource in the the early days od textile production, we now understand that clean water is precious and finite." 
              
             </Quote>

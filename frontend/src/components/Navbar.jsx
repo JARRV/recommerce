@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import LogoImg from "../utils/Images/Logo.png"
+import LogoImg from "../utils/Images/JAL.png"
 import Button from "./Button";
 import { NavLink } from 'react-router-dom';
 
@@ -231,7 +231,7 @@ const Navbar = () => {
               sx={{ color: "inherit", fontSize: "28px" }}
             />
           </Navlink>
-          <Button text="Signin" small></Button>
+          <Button text="Sign in" small></Button>
         </ButtonContainer>
       </NavbarContainer>
     </Nav>
