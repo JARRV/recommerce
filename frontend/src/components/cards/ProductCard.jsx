@@ -24,12 +24,12 @@ const Card = styled.div`
   cursor: pointer;
   @media (max-width: 600px) {
     width: 170px;
+ 
   }
 `;
 const Image = styled.img`
   width: 100%;
   height: 320px;
-  border-radius: 6px;
   object-fit: cover;
   transition: all 0.3s ease-out;
   @media (max-width: 600px) {
@@ -52,7 +52,7 @@ const Top = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  border-radius: 6px;
+ 
   transition: all 0.3s ease-out;
   &:hover {
     background-color: ${({ theme }) => theme.primary};
@@ -277,7 +277,7 @@ const ProductCard = ({ product }) => {
         <Desc>{product?.brand}</Desc>
         <Price>
           ${product?.similar_items?.[0]?.price} <Span>${product?.price}</Span>
-          <Percent>${product?.percent_off}% Off</Percent>
+          <Percent>${product?.similar_items?.[0]?.percent_off}% off</Percent>
         </Price>
         <Title>Available at {storeCount} {storeCount === 1 ? 'store' : 'stores'}</Title>
       </Details>

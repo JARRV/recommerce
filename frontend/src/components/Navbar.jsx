@@ -22,6 +22,7 @@ const Nav = styled.div`
  z-index: 10;
  color: white;
 `;
+
 const NavbarContainer = styled.div`
   width: 100%;
   max-width: 1400px;
@@ -147,6 +148,7 @@ const Navbar = () => {
           <MenuRounded style={{color:"inherit"}}/>
         </MobileIcon>
 
+   
         <NavLogo>
           <Logo src={LogoImg}></Logo>
         </NavLogo>
@@ -216,6 +218,7 @@ const Navbar = () => {
               text="SignIn"
               small/>
         </Mobileicons>
+
         <ButtonContainer>
           <Navlink to="/search">
             <SearchRounded sx={{color:"inherit", fontSize:"30px"}}></SearchRounded>

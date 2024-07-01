@@ -15,7 +15,6 @@ const Card = styled.div`
 
 const Details = styled.div`
     display: flex;
-    gap: 18px;
     flex-direction: column;
     padding: 4px 2px;
     flex: 1;
@@ -45,6 +44,24 @@ const Price = styled.div`
     font-size: 18px;
     font-weight: 500;
     color: ${({ theme }) => theme.text_primary};
+    margin-bottom: 7px;
+    `;
+
+const Size = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 10px;
+    `;
+
+const Span2 = styled.div`
+    
+    color: black;
+    font-size: 16px;
+    
     `;
 
 const Span = styled.div`
@@ -56,9 +73,10 @@ const Span = styled.div`
     `;
 
 const Store = styled.div`
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 600;
     color: ${({ theme }) => theme.text_primary};
+    margin-bottom: 10px;
     `;
 
 const Percent = styled.div`
@@ -74,8 +92,9 @@ const RecommerceCard = ({recommerceProduct}) => {
         <Details>
             <Store>{recommerceProduct?.store}</Store>
             <Price>{recommerceProduct?.price} 
-                <Percent>20% off</Percent> 
+                <Percent>{recommerceProduct?.percent_off}% off</Percent>
             </Price>
+            <Size>Size <Span2>{recommerceProduct?.size}</Span2></Size> 
             <Button onClick={() => {
                 window.open(recommerceProduct?.link)
             }}>Buy Now</Button> 

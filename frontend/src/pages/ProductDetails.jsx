@@ -224,7 +224,6 @@ const ProductDetails = () => {
                         <Brand>{product?.brand}</Brand>
                         <Price>${product?.price}</Price>
                         
-                        
                     </div>
                     <CardWrapper>
                         {recommerceProducts.map((recommerceProduct) => (
