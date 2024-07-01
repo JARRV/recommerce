@@ -10,7 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import bcrypt
 
 from .models import Item, Similar_Item, User, PurchaseHistory
-from .serializers import ItemSerializer, SimilarItemSerializer, UserSerializer, PurchaseHistorySerializer, RegisterSerializer, LoginSerializer
+from .serializers import ItemSerializer, SimilarItemSerializer, UserSerializer, PurchaseHistorySerializer, LoginSerializer
 
 class ItemList(generics.ListCreateAPIView): #gets all the objects in the item database, needs some work in filtering here. 
     queryset = Item.objects.all()
@@ -57,7 +57,7 @@ class SimilarItemInfo(generics.ListAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    # permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]
     # authentication_classes = [IsAdminUser]
 
 class UserInfo(generics.RetrieveUpdateDestroyAPIView):
@@ -100,32 +100,43 @@ class ItemPurchaseHistory(generics.ListAPIView):
         item_id = self.kwargs('item_id')
         queryset = PurchaseHistory.objects.filter(item_id_id=item_id)
         return queryset
+    
 class RegisterView(generics.CreateAPIView):
-    # api_view(['POST'])
-    queryset = User.objects.all()
-    serializer_class = RegisterSerializer
     authentication_classes = []
     permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
+    serializer_class = UserSerializer
+    def post (self, request):
+        serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
+        serializer.save()
+        return Response(serializer.data)
+# class RegisterView(generics.CreateAPIView):
+#     # api_view(['POST'])
+#     queryset = User.objects.all()
+#     serializer_class = RegisterSerializer
+#     authentication_classes = []
+#     permission_classes = [AllowAny]
 
-        if not isinstance(user, User):
-            print(f"Error: Failed to create user. Got type: {type(user)}")  # Debug statement
-            return Response({'error': 'Failed to create user.'}, status=status.HTTP_400_BAD_REQUEST)
-        # Assuming you want to generate JWT tokens for the user upon registration
-        refresh = RefreshToken.for_user(user.id)
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.save()
 
-        print(f"User created: {user.username}, id: {user.id}")
-        print(f"Refresh token: {refresh}")
-        return Response({
-            'message': str("User created successfully"),
-            'user_id': user.id,
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=status.HTTP_201_CREATED)
+#         if not isinstance(user, User):
+#             print(f"Error: Failed to create user. Got type: {type(user)}")  # Debug statement
+#             return Response({'error': 'Failed to create user.'}, status=status.HTTP_400_BAD_REQUEST)
+#         # Assuming you want to generate JWT tokens for the user upon registration
+#         print(isinstance(user, User))
+#         refresh = RefreshToken.for_user(user)
+
+#         print(f"User created: {user.username}, id: {user.id}")
+#         print(f"Refresh token: {refresh}")
+#         return Response({
+#             'message': str("User created successfully"),
+#             'user_id': user.id,
+#             'refresh': str(refresh),
+#             'access': str(refresh.access_token),
+#         }, status=status.HTTP_201_CREATED)
 
 class LoginView(APIView):
     def post(self, request, *args, **kwargs):
@@ -137,7 +148,7 @@ class LoginView(APIView):
     
     
 
-        if user is not None:
+        if user is not None and isinstance(user, User):
             refresh = RefreshToken.for_user(user)
             return Response({
                 'refresh': str(refresh),

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ItemList, ItemDetail, SimilarItemList, SimilarItemDetails, SimilarItemInfo, UserList, UserInfo, AllPurchaseHistory, PurchaseHistoryDetails, UserPurchaseHistory, ItemPurchaseHistory,LoginView,RegisterView
+from .views import ItemList, ItemDetail, SimilarItemList, SimilarItemDetails, SimilarItemInfo, UserList, UserInfo, AllPurchaseHistory, PurchaseHistoryDetails, UserPurchaseHistory, ItemPurchaseHistory,LoginView, RegisterView
 
 urlpatterns = [
     path("items/", ItemList.as_view(), name='item_list'), #all original items
