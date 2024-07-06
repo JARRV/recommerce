@@ -25,3 +25,6 @@ class SimilarItemList(generics.ListCreateAPIView):
     queryset = Similar_Item.objects.all()
     serializer_class = SimilarItemSerializer
 
+def index(request):
+    return render(request, 'index.html')
+

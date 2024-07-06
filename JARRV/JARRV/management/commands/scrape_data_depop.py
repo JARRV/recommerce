@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> rida
 import requests
 from bs4 import BeautifulSoup as bs
 from django.core.management.base import BaseCommand
@@ -9,11 +5,6 @@ from webapp.models import Item
 import subprocess
 import json
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> rida
 class Command(BaseCommand):
     help = "Scrape data from depop product page"
 
@@ -64,11 +55,7 @@ class Command(BaseCommand):
         if response.status_code == 200:
             return response.json()
         else:
-<<<<<<< HEAD
-            self.stdout.write(self.style.ERROR(f"Failed to retrieve data from page {page}: {response.status_code}"))
-=======
             self.stdout.write(self.style.ERROR(f"Failed: {response.status_code}"))
->>>>>>> rida
             return None
                 
     def save_to_file(self, data):
@@ -76,8 +63,6 @@ class Command(BaseCommand):
             json.dump(data, file, ensure_ascii=False, indent=4)
         self.stdout.write(self.style.SUCCESS("Data saved to depop_product.json"))
 
-<<<<<<< HEAD
-=======
 
 
 
@@ -106,4 +91,3 @@ class Command(BaseCommand):
             return True
 '''  
 
->>>>>>> rida
