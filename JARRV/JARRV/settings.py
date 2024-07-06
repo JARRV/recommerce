@@ -127,7 +127,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
   # Check this path
-    os.path.join(BASE_DIR, 'frontend/', 'dist/', 'static/'),
+    os.path.join(BASE_DIR, 'JARRV/', 'static/'),
 ]
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
