@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.conf import settings
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -122,12 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'JARRV', 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'JARRV', 'static')
 
 STATICFILES_DIRS = [
   # Check this path
-    os.path.join(BASE_DIR, 'frontend', 'dist', 'static'),
+    os.path.join(BASE_DIR, 'frontend/', 'dist/', 'static/'),
 ]
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
