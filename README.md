@@ -18,6 +18,8 @@ We find similar recommerce options from sites such as Depop and Vinted for the s
 3. *Providing You the Best Options*
 We provide you options with your sizes in mind, getting you both the best deals from well-known brands.
 
+Project Video: https://youtu.be/a6MA2Sxcv6I?si=9dEmllnXwz-7-2re
+
 Coming Soon:
 Jal is working on an extension that allows you to browse your favorite online shopping sites to provide you with recommerce options for almost everything you find online. Save water, shop with Jal!
 
