@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "jarrv.onrender.com";
+const baseURL = "https://jarrv.onrender.com";
 
 const API = axios.create({
     baseURL: baseURL|| "http://localhost:8000"
