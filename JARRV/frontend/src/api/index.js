@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:8000"
+    baseURL: "jarrv.onrender.com" || "http://localhost:8000"
 })
 
 
