@@ -9,13 +9,13 @@ Our Solution:
 JAL finds trending clothes from your favorite brands, and provides alternatives on recommerce sites such as Depop and Poshmark. We show how much water you saved by buying used, and provide loyalty points, rewarding you monetarily for every 20,000 gallons of water saved. 
 
 How it works:
-1. *Finding the Trends*
+1. *Finding the Trends*:
 We go through popular fashion sites (such as H and M) and collect information about their trending items.
 
-2. *Finding our Water Savior Alternatives*
+2. *Finding our Water Savior Alternatives*:
 We find similar recommerce options from sites such as Depop and Vinted for the same item.
 
-3. *Providing You the Best Options*
+3. *Providing You the Best Options*:
 We provide you options with your sizes in mind, getting you both the best deals from well-known brands.
 
 Project Video: https://youtu.be/a6MA2Sxcv6I?si=9dEmllnXwz-7-2re
